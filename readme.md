@@ -1,5 +1,7 @@
 # Influx Workshop @ HTW Berlin
 
+> Bei Fragen oder zum Nachlesen findet ihr die zugehörige Präsentation im Order `./presentation/`
+
 ## 01 | Mit Influx loslegen 🚀
 
 ### Influx installieren und konfigurieren ⚙️
@@ -23,18 +25,36 @@
 
 ## 02 | Influx ins IoT-Projekt einbinden 🌡️
 
+### Node RED vorbereiten 🔧
+
 - Node RED starten und öffnen
-- Benötigten Influx Node via `Menu > Manage Pallete` (oder <kbd>⌥⇧p</kbd>) installieren
+- Benötigten Influx Node via `Menu > Manage Pallete` installieren
   - [node-red-contrib-influxdb](https://flows.nodered.org/node/node-red-contrib-influxdb)
-- Custom Flows aus diesem Repository exportieren
-  - Vorher die eigenen Flows als JSON exportieren, damit nichts verloren geht! 🚨
-  - In Node RED auf `Menu > Import`gehen (alt. <kbd>⌥i</kbd>)
+- Die eigenen, aktuellen Flows als JSON exportieren, damit nichts verloren geht! 🚨
+
+### Daten in Influx schreiben 💾
+
+- Den Flow `writeToInflux.json` aus diesem Repository importieren
+  - In Node RED auf `Menu > Import`gehen
   - Dort den JSON Content aus `writeToInflux.json` hineinkopieren
-  - Dort den JSON Content aus `readFromInflux.json` hineinkopieren
 - InfluxDB Nodes konfiguriern
   - Influx **Version 2.0** auswählen
   - URL der laufenden Influx Instanz (i.d.R. `http://localhost:8086/`) eingeben
   - API Token aus dem InfluxDB Setup-Schritt eingeben
   - In den `influxdb out` Nodes den zuvor angelegten Bucket spezifizieren (z.B. `sensor_data`)
-  - Ggf. den Code der [Flux Queries](https://docs.influxdata.com/flux/v0/get-started/query-basics/) in den `influxdb in` Nodes anpassen (bzgl. Bucketnamen, etc.)
+- Deployen und dann geht's auch schon los 🤓
+
+### Daten aus Influx auslesen (Flux QL) 👀
+
+- Den Flow `readFromInflux.json` aus diesem Repository importieren
+  - In Node RED auf `Menu > Import`gehen
+  - Dort den JSON Content aus `readFromInflux.json` hineinkopieren
+- InfluxDB Nodes konfiguriern
+  - Influx **Version 2.0** auswählen
+  - URL der laufenden Influx Instanz (i.d.R. `http://localhost:8086/`) eingeben
+  - API Token aus dem InfluxDB Setup-Schritt eingeben
+  - Den Code der [Flux Queries](https://docs.influxdata.com/flux/v0/get-started/query-basics/) in den `influxdb in` Nodes gegebenenfalls anpassen
+    - ggf. heißt euer Bucket anders
+    - vielleicht wollt ihr andere Measurements auslesen
+    - Tauscht die **StudentId** doch mal mit eurer eigenen aus!
 - Deployen und dann geht's auch schon los 🤓
